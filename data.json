@@ -1,1 +1,8 @@
-[{"id":"1","name":"2","picture":"uploads/Screenshot 2023-07-20 163420.png","price":"400000"},{"id":"2","name":"Áo ","picture":"uploads/Screenshot 2023-07-20 163403.png","price":"3222244"}]
+[
+  {
+    "id": "1",
+    "name": "2",
+    "picture": "uploads/Screenshot 2023-07-20 163420.png",
+    "price": "400000"
+  }
+]
