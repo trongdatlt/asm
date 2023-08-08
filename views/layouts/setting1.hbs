@@ -1,131 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style>
-	img {	
-        height: 50px;
-		width: 100px;
-	}
-</style>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style>
+		img {
+			height: 50px;
+			width: 100px;
+		}
+	</style>
+
+<script>
+function confirmDelete() {
+    var result = confirm("Bạn có chắc muốn xóa mục này?");
+    return result;
+}
+</script>
+
+</head>
 
 
-
- </head>
-  <body>
-    <div class="container">
-        <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-6">
-						<h2>Manage <b>Employees</b></h2>
+<body>
+	<div class="container">
+		<div class="table-wrapper">
+			<div class="table-title">
+				<div class="row">
+					<div class="col-sm-6">
+						<h2>Quản Lý Sản Phẩm<b></b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
-						<a href="/" class="btn btn-success" ><span>BACK</span></a>
+						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><span>Thêm Sản Phẩm</span></a>
+						<a href="/employeeEdit?token={{token}}" class="btn btn-success"><span>Danh Sách Nhân
+								Viên</span></a>
+
+								<a href="/?token={{token}}" class="btn btn-success"><span>Trang Chủ</span></a>
 					</div>
-                </div>
-            </div>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-						
-                        <th>id</th>
-                        <th>Name</th>
-						<th>Picture</th>
-                        <th>Price</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-             
-                    {{#each data}}
-				    <tr>
-						
-						 
-      		<td> {{id}}</td>
-     		 <td> {{name}}</td>
-		<td><img src="{{picture}}" alt="" srcset=""> </td>
-      		<td> {{price}}</td>
-			 <td>
-                            <a href="/find/{{id}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                         <a href="/delete/{{id}}" class="delete" data-toggle="modal">
- 					 <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-</a>
+				</div>
+			</div>
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+
+						<th>id</th>
+						<th>Tên</th>
+						<th>Hình Ảnh</th>
+						<th>Giá</th>
+						<th>Số Lượng</th>
+
+						<th>Hành Động</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					{{#each data}}
+					<tr>
 
 
-                        </td>
-   
-						
-                      
-                     
-                       
-                    </tr>
-                      {{/each}}
-						
-			
-                </tbody>
-            </table>
-			
-               
-                
-            
-        </div>
-    </div>
+						<td> {{id}}</td>
+						<td> {{name}}</td>
+						<td><img src="{{picture}}" alt="" srcset=""> </td>
+						<td> {{price}}</td>
+						<td> {{total}}</td>
+						<td>
+							<a href="/find/{{id}}?token={{token}}" class="edit" data-toggle="modal"><i
+									class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i> </a>
+							<a href="/delete/{{id}}?token={{token}}" class="delete" data-toggle="modal" onclick="return confirmDelete();">
+								<i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+							</a>
+
+
+						</td>
+
+
+
+
+
+					</tr>
+					{{/each}}
+
+
+				</tbody>
+			</table>
+
+
+
+
+		</div>
+	</div>
 	<!-- Edit Modal HTML -->
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form id="addEmployeeForm" action="/addEmployee" method="POST"  enctype="multipart/form-data">
-					<div class="modal-header">						
-						<h4 class="modal-title">Add Employee</h4>
+				<form id="addEmployeeForm" action="/add" method="POST" enctype="multipart/form-data">
+					<div class="modal-header">
+						<h4 class="modal-title">Add </h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">					
+					<div class="modal-body">
 						<div class="form-group">
 							<label>id</label>
-							<input name="id" type="text" id="id"class="form-control" required >
+							<input name="id" type="text" id="id" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<label>Name</label>
-							<input  name="name"  id="name" type="text" class="form-control" required>
+							<label>Tên</label>
+							<input name="name" id="name" type="text" class="form-control" required>
 						</div>
 						<div>
-							<label for="">Image</label>
-							 
-    					<input  type="file" id= "picture"name="image"  accept="image/*" required />
-    						
-  					
+							<label for="">Ảnh</label>
+
+							<input type="file" id="picture" name="image" accept="image/*" required />
+
+
 						</div>
 						<div class="form-group">
-							<label>Price</label>
-							<input name="price" id="price"type="text" class="form-control" required>
-						</div>					
+							<label>Giá</label>
+							<input name="price" id="price" type="number" class="form-control" required
+								value="{{data.price}}">
+						</div>
+						<div class="form-group">
+							<label>Số lượng</label>
+							<input name="total" id="total" type="number" class="form-control" required
+								value="{{data.total}}">
+						</div>
 					</div>
 					<div class="modal-footer">
-						<button  type="button"class="btn btn-default" data-dismiss="modal" value="Cancel" >
-							<a href="\edit1">Cancel</a>
-						</button>
 						<input type="submit" class="btn btn-success" value="Add">
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	
 
-	
-	
-	
-	
+
+
+
+
+
 </body>
+
 </html>

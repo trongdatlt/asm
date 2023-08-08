@@ -15,48 +15,47 @@
 <body>
 
 
-	<form id="editEmployeeForm" action="/editForm" method="POST" enctype="multipart/form-data">
+	<form id="editEmployeeForm" action="/changeinfo" method="POST" enctype="multipart/form-data">
 		<div class="modal-header">
-			<h4 class="modal-title">Add Employee</h4>
-			<button  type="button" class="close" data-dismiss="modal" aria-hidden="true">&times; <a href="/employeeEdit?token={{token}}"></a></button>
+			<h4 class="modal-title">Edit Employee</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		</div>
 		<div class="modal-body">
 			<div class="form-group">
-				<label>id</label>
-				<input name="id" type="text" id="id" class="form-control" value="{{data.id}}" readonly>
+				<label>Email</label>
+				<input name="email" type="text" id="email" class="form-control" value="{{data.email}}" readonly>
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input name="password" id="password" type="password" class="form-control" required
+					value="{{data.password}}">
 			</div>
 			<div class="form-group">
 				<label>Name</label>
-				<input name="name" id="name" type="text" class="form-control" value="{{data.name}}" required>
-			</div>
-			<div>
-				<label for="">Image</label>
-
-				<input type="file" id="picture" name="picture" required accept="image/*" />
-
+				<input name="name" id="name" type="text" class="form-control" required value="{{data.name}}">
 
 			</div>
 			<div class="form-group">
+				<label>Address</label>
+				<input name="address" id="address" type="text" class="form-control" required
+					value="{{data.address}}">
 
-				<img width="100px" height="100px" src="../{{data.picture}}" alt="" srcset="">
+			</div>
+		
 
-			</div>
-			<div class="form-group">
-				<label>Price</label>
-				<input name="price" id="price" type="number" class="form-control" required value="{{data.price}}">
-			</div>
-			<div class="form-group">
-				<label>Total</label>
-				<input name="total" id="total" type="number" class="form-control" required value="{{data.total}}">
-			</div>
+
 		</div>
 
 		<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-				<a href="/admin?token={{token}}">Cancel</a>
+			<button type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+				<a href="/?token={{token}}">Cancel</a>
 			</button>
+
 			<input type="submit" class="btn btn-success" value="Edit">
 		</div>
+		    {{#if message}}
+        <p>{{message}}</p>
+    {{/if}}
 	</form>
 
 	<!-- Optional JavaScript -->
